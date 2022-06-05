@@ -1,0 +1,38 @@
+import java.util.* ;
+import java.io.*; 
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Solution 
+{
+	public static ArrayList<Integer> nextPermutation(ArrayList<Integer> nums) 
+	{
+		// Write your code here.
+        
+         int i=nums.size()-2;
+        while(i>=0 && nums.get(i+1)<=nums.get(i)){
+            i--;
+        }
+        if(i>=0){
+            int j=nums.size()-1;
+            while(nums.get(j)<=nums.get(i)){
+                j--;
+            }
+            swap(nums,i,j);
+        }
+        reverse(nums,i+1,nums.size()-1);
+        return nums;
+    }
+    public static void swap(ArrayList<Integer> nums,int i,int j){
+        int tmp=nums.get(i);
+        nums.set(i,nums.get(j));
+        nums.set(j,tmp);
+    }
+    public static void reverse(ArrayList<Integer> nums,int start,int end){
+        while(start<end){
+            swap(nums,start,end);
+            start++;
+            end--;
+        }
+	}
+}
