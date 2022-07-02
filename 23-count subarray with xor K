@@ -1,0 +1,29 @@
+import java.util.* ;
+import java.io.*; 
+import java.util.ArrayList;
+
+public class Solution {
+	public static int subarraysXor(ArrayList<Integer> arr, int x) {
+		// Write your code here.
+        HashMap<Integer,Integer> map=new HashMap();
+        int currXor=0;
+        int count=0;
+        for(int i=0;i<arr.size();i++){
+            currXor ^=(arr.get(i));
+            if(currXor==x){
+                count++;
+            }
+            if(map.containsKey((currXor) ^ (x))){
+                int currCnt=map.get((currXor) ^ (x));
+                count+=currCnt;
+            }
+             if(map.containsKey(currXor)){
+                map.put(currXor,map.get(currXor)+1);
+                
+            }else{
+                map.put(currXor,1);
+            }   
+        }
+        return count;
+	}
+}
