@@ -1,0 +1,48 @@
+import java.util.* ;
+import java.io.*; 
+/****************************************************************
+
+    Following is the class structure of the Node class:
+
+        class Node
+		{
+		    public int data;
+		    public Node next;
+
+		    Node(int data)
+		    {
+		        this.data = data;
+		        this.next = null;
+		    }
+		}
+
+*****************************************************************/
+
+public class Solution 
+{
+    public static Node firstNode(Node head) 
+    {
+        if(head==null){
+            return null;
+        }
+        Node slowPtr = head;
+        Node fastPtr = head;
+        
+        while(fastPtr.next != null && fastPtr.next.next != null){
+            
+            slowPtr = slowPtr.next;
+            fastPtr = fastPtr.next.next;
+            
+            if(slowPtr == fastPtr){
+                Node ptr=head;
+                while(slowPtr!=ptr){
+                    ptr=ptr.next;
+                    slowPtr = slowPtr.next; 
+                }
+                return ptr;
+            }
+        }
+        
+        return null;
+    }
+}
