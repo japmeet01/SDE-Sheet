@@ -1,0 +1,32 @@
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+    public static int maximumActivities(List<Integer> start, List<Integer> end) {
+        //Write your code here
+        List<List<Integer>> list=new ArrayList();
+        
+        
+        for(int i=0;i<start.size();i++){
+            List<Integer> curr=new ArrayList();
+            curr.add(start.get(i));
+            curr.add(end.get(i));
+            list.add(curr);
+        }
+        
+        // System.out.println(list);
+        Collections.sort(list, new Comparator<List<Integer>>() {    
+        public int compare(List<Integer> o1, List<Integer> o2) {
+            return o1.get(1).compareTo(o2.get(1));
+        }               
+        });
+        int ans=0;
+        int last=-1;
+        for(int i=0;i<list.size();i++){
+            if(list.get(i).get(0)>=last){
+                last=list.get(i).get(1);
+                ans+=1;
+            }
+        }
+        return ans;
+    }
+}
