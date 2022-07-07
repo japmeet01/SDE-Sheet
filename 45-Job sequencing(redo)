@@ -1,0 +1,36 @@
+import java.io.*;
+import java.util.*;
+public class Solution
+{
+    public static int jobScheduling(int[][] jobs)
+    {
+        // Write your code here
+        Arrays.sort(jobs, (j1, j2)->{
+            return j2[1] - j1[1] ;
+        }) ;
+        
+        int max = 0 ;
+        
+        for (int[] job : jobs)
+        {
+            max = Math.max(max, job[0]) ;
+        }
+        
+        boolean[] isSlotOccupied = new boolean[max+1] ;
+        int profit = 0 ;
+        
+        for (int[] job: jobs)
+        {
+            int ddline=job[0];
+            for(int j=ddline;j>0;j--){
+                if(isSlotOccupied[j]==false){
+                    isSlotOccupied[j]=true;
+                    profit+=job[1];
+                    break;
+                }
+            }
+        }
+        
+        return profit ;
+    }
+}
