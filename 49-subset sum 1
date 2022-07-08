@@ -1,0 +1,18 @@
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+    public static ArrayList<Integer> subsetSum(int arr[]) {
+       ArrayList<Integer> res=new ArrayList();
+        subSum(0,arr,0,res);
+        Collections.sort(res);
+        return res;
+    }
+    public static void subSum(int start,int[]arr,int sum,ArrayList<Integer> res){
+        if(start>=arr.length){
+            res.add(sum);
+            return;
+        }
+        subSum(start+1,arr,sum+arr[start],res);
+        subSum(start+1,arr,sum,res);
+    }
+}
