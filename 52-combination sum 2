@@ -1,0 +1,37 @@
+import java.util.*;
+
+public class Solution 
+{
+    public static ArrayList<ArrayList<Integer>> combinationSum2(ArrayList<Integer> candidates, int n, int target)
+    {
+        Collections.sort(candidates);
+        ArrayList<ArrayList<Integer>> combinations = new ArrayList<>();
+        generateTotalWays(candidates, 0, target, combinations, new ArrayList<Integer>());
+        return combinations;
+        
+    }
+    
+    public static void generateTotalWays(ArrayList<Integer> candidates, int currentIndex, int target, ArrayList<ArrayList<Integer>> combinations, ArrayList<Integer> currentAns){
+        
+        if(target == 0){
+            combinations.add(new ArrayList<>(currentAns));
+            return;
+        }       
+        
+        for(int i=currentIndex;i<candidates.size();i++){
+            if(i>currentIndex && candidates.get(i)==candidates.get(i-1)){
+                continue;
+            }
+            
+            int currentVal = candidates.get(i);
+        
+            if(currentVal <= target ){
+                currentAns.add(currentVal);
+                generateTotalWays(candidates, i+1, target - currentVal, combinations, currentAns);
+                currentAns.remove(currentAns.size() - 1);
+             }
+            // generateTotalWays(candidates, currentIndex + 1, target, combinations, currentAns);
+        }
+    }
+    
+}
